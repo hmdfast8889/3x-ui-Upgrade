@@ -303,29 +303,38 @@ function rewriteVlessConfig(uri){
     if(!uri.startsWith('vless://')) return uri;
 
     try{
-        const hash = uri.includes('#') ? uri.slice(uri.indexOf('#')) : '';
-        const body = uri.slice(8, uri.indexOf('#') > -1 ? uri.indexOf('#') : uri.length);
-        const at = body.indexOf('@');
+        const hashIndex = uri.indexOf('#');
+        const hash = hashIndex > -1 ? uri.slice(hashIndex) : '';
+        const main = hashIndex > -1 ? uri.slice(0, hashIndex) : uri;
+
+        const data = main.slice(8);
+        const at = data.indexOf('@');
         if(at === -1) return uri;
 
-        const uuid = body.slice(0, at);
-        const queryIndex = body.indexOf('?');
-        const query = queryIndex > -1 ? body.slice(queryIndex + 1) : '';
+        const uuid = data.slice(0, at);
+        const server = data.slice(at + 1);
+
+        const q = server.indexOf('?');
+        const addressPort = q > -1 ? server.slice(0, q) : server;
+        const query = q > -1 ? server.slice(q + 1) : '';
+
+        // استخراج address از کانفیگ اصلی
+        const address = addressPort.split(':')[0];
 
         const params = new URLSearchParams(query);
 
         params.set('encryption','none');
         params.set('security','tls');
-        params.set('sni','hmd-fast-production-7601.up.railway.app');
+        params.set('sni', address);
         params.set('fp','chrome');
         params.set('insecure','0');
         params.set('allowInsecure','0');
-        params.set('type','xhttp');
-        params.set('host','hmd-fast-production-7601.up.railway.app');
-        params.set('path','/');
-        params.set('mode','auto');
 
-        return `vless://${uuid}@hmd-fast-production-7601.up.railway.app:443?${params.toString()}${hash}`;
+        // پورت همیشه 443 و host مطابق address اصلی
+        params.set('host', address);
+
+        return `vless://${uuid}@${address}:443?${params.toString()}${hash}`;
+
     }catch(e){
         return uri;
     }
