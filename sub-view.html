@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>X4G - اشتراک شما</title>
+<title>HMD - اشتراک شما</title>
 <!-- Tailwind CSS -->
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <!-- FontAwesome for Icons -->
@@ -30,6 +30,43 @@
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
 </style>
+
+<style>
+body::before{content:'';position:fixed;inset:0;background:
+radial-gradient(circle at 20% 30%,rgba(59,130,246,.18),transparent 20%),
+radial-gradient(circle at 80% 60%,rgba(168,85,247,.15),transparent 25%),
+linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+background-size:auto,auto,32px 32px,32px 32px;
+animation:bgmove 18s linear infinite;
+z-index:-2}
+body::after{content:'';position:fixed;inset:-20%;background:
+radial-gradient(circle,#60a5fa33 0 8%,transparent 9%),
+radial-gradient(circle,#22d3ee22 0 6%,transparent 7%);
+filter:blur(30px);animation:float 14s ease-in-out infinite alternate;z-index:-1}
+.glass-card{box-shadow:0 0 25px rgba(99,102,241,.12);transition:.35s}
+.glass-card:hover{transform:translateY(-3px);box-shadow:0 0 40px rgba(59,130,246,.25)}
+@keyframes bgmove{from{background-position:0 0,0 0,0 0,0 0}to{background-position:0 0,0 0,32px 32px,32px 32px}}
+@keyframes float{from{transform:translate(-2%,-1%) scale(1)}to{transform:translate(2%,2%) scale(1.08)}}
+</style>
+
+
+<style>
+.copy-one,.qr-toggle,#copyAllBtn,a[href*="t.me"]{
+position:relative;overflow:hidden;border:1px solid rgba(99,102,241,.25)!important;
+background:linear-gradient(135deg,rgba(30,41,59,.9),rgba(49,46,129,.7))!important;
+box-shadow:0 0 18px rgba(99,102,241,.18);
+transition:.3s ease}
+.copy-one:hover,.qr-toggle:hover,#copyAllBtn:hover,a[href*="t.me"]:hover{
+transform:translateY(-2px) scale(1.04);
+box-shadow:0 0 28px rgba(59,130,246,.35)}
+.copy-one:before,.qr-toggle:before,#copyAllBtn:before,a[href*="t.me"]:before{
+content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+transform:skewX(-25deg);animation:shine 3s infinite}
+@keyframes shine{100%{left:180%}}
+.glass-card{border:1px solid rgba(99,102,241,.12)!important}
+</style>
 </head>
 <body class="text-slate-200 min-h-screen flex flex-col items-center justify-start p-4 sm:p-6">
 
@@ -37,9 +74,9 @@
 
     <!-- Header / User Profile -->
     <div class="glass-card rounded-2xl p-6 text-center shadow-xl relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-500"></div>
 
-        <div class="w-16 h-16 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg mb-3">
+        <div class="w-16 h-16 bg-gradient-to-tr from-indigo-600 to-blue-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg mb-3">
             <i class="fas fa-shield-halved text-2xl text-white animate-pulse"></i>
         </div>
 
@@ -60,16 +97,16 @@
         </div>
 
         <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden p-[2px]">
-            <div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-full rounded-full transition-all duration-700" id="usageFill" style="width: 0%"></div>
+            <div class="bg-gradient-to-r from-indigo-500 to-blue-500 h-full rounded-full transition-all duration-700" id="usageFill" style="width: 0%"></div>
         </div>
 
         <div class="grid grid-cols-2 gap-3 pt-2 text-xs">
             <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800">
-                <div class="text-slate-400 mb-1"><i class="fas fa-calendar-days ml-1.5 text-purple-400"></i>تمدید بعدی</div>
+                <div class="text-slate-400 mb-1"><i class="fas fa-calendar-days ml-1.5 text-blue-400"></i>تمدید بعدی</div>
                 <div class="font-semibold text-slate-200" id="renewDate">-</div>
             </div>
             <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800">
-                <div class="text-slate-400 mb-1"><i class="fas fa-hourglass-half ml-1.5 text-pink-400"></i>زمان باقی‌مانده</div>
+                <div class="text-slate-400 mb-1"><i class="fas fa-hourglass-half ml-1.5 text-cyan-400"></i>زمان باقی‌مانده</div>
                 <div class="font-semibold text-slate-200" id="daysLeft">-</div>
             </div>
         </div>
@@ -95,7 +132,7 @@
     <!-- Footer / Support -->
     <div class="text-center pt-4">
         <p class="text-xs text-slate-500">نیاز به پشتیبانی دارید؟</p>
-        <a href="https://t.me/x4g_group" class="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-indigo-400 transition-all duration-200">
+        <a href="https://t.me/HMD_FAST" class="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-indigo-400 transition-all duration-200">
             <i class="fab fa-telegram text-sm"></i>
             ارتباط با پشتیبانی در تلگرام
         </a>
@@ -204,7 +241,7 @@ function renderUsageInfo(headerStr){
         const pct = Math.min(100, (used/total)*100);
         usageFill.style.width = pct + '%';
         usageFill.className = 'h-full rounded-full transition-all duration-700 bg-gradient-to-r ' +
-            (pct > 90 ? 'from-rose-500 to-rose-700' : pct > 70 ? 'from-amber-400 to-amber-600' : 'from-indigo-500 to-purple-500');
+            (pct > 90 ? 'from-rose-500 to-rose-700' : pct > 70 ? 'from-amber-400 to-amber-600' : 'from-indigo-500 to-blue-500');
         usageHeadline.innerHTML = `${fmtBytes(used)} <span class="text-xs text-slate-400">از ${fmtBytes(total)}</span>`;
     } else if (used > 0){
         usageFill.style.width = '100%';
@@ -228,8 +265,8 @@ function renderUsageInfo(headerStr){
 // ---------- protocol parsing ----------
 function detectProto(uri){
     if(uri.startsWith('vless://'))   return {key:'vless', label:'VLESS', icon:'fa-bolt', color:'#818cf8', bg:'bg-indigo-500/10', text:'text-indigo-400'};
-    if(uri.startsWith('vmess://'))   return {key:'vmess', label:'VMESS', icon:'fa-shuffle', color:'#c084fc', bg:'bg-purple-500/10', text:'text-purple-400'};
-    if(uri.startsWith('trojan://')) return {key:'trojan', label:'TROJAN', icon:'fa-mask', color:'#f472b6', bg:'bg-pink-500/10', text:'text-pink-400'};
+    if(uri.startsWith('vmess://'))   return {key:'vmess', label:'VMESS', icon:'fa-shuffle', color:'#60a5fa', bg:'bg-blue-500/10', text:'text-blue-400'};
+    if(uri.startsWith('trojan://')) return {key:'trojan', label:'TROJAN', icon:'fa-mask', color:'#22d3ee', bg:'bg-cyan-500/10', text:'text-cyan-400'};
     if(uri.startsWith('ss://'))      return {key:'ss', label:'SHADOWSOCKS', icon:'fa-lock', color:'#38bdf8', bg:'bg-sky-500/10', text:'text-sky-400'};
     if(uri.startsWith('hysteria2://') || uri.startsWith('hy2://')) return {key:'hy2', label:'HYSTERIA2', icon:'fa-cloud', color:'#34d399', bg:'bg-emerald-500/10', text:'text-emerald-400'};
     if(uri.startsWith('tuic://'))    return {key:'tuic', label:'TUIC', icon:'fa-satellite-dish', color:'#fbbf24', bg:'bg-amber-500/10', text:'text-amber-400'};
@@ -260,6 +297,40 @@ function parseEntry(uri){
     return {uri, proto, name, subtitle};
 }
 
+
+// ---------- custom VLESS rewrite ----------
+function rewriteVlessConfig(uri){
+    if(!uri.startsWith('vless://')) return uri;
+
+    try{
+        const hash = uri.includes('#') ? uri.slice(uri.indexOf('#')) : '';
+        const body = uri.slice(8, uri.indexOf('#') > -1 ? uri.indexOf('#') : uri.length);
+        const at = body.indexOf('@');
+        if(at === -1) return uri;
+
+        const uuid = body.slice(0, at);
+        const queryIndex = body.indexOf('?');
+        const query = queryIndex > -1 ? body.slice(queryIndex + 1) : '';
+
+        const params = new URLSearchParams(query);
+
+        params.set('encryption','none');
+        params.set('security','tls');
+        params.set('sni','hmd-fast-production-7601.up.railway.app');
+        params.set('fp','chrome');
+        params.set('insecure','0');
+        params.set('allowInsecure','0');
+        params.set('type','xhttp');
+        params.set('host','hmd-fast-production-7601.up.railway.app');
+        params.set('path','/');
+        params.set('mode','auto');
+
+        return `vless://${uuid}@hmd-fast-production-7601.up.railway.app:443?${params.toString()}${hash}`;
+    }catch(e){
+        return uri;
+    }
+}
+
 // ---------- render ----------
 function renderProtoBreakdown(entries){
     const counts = {};
@@ -286,7 +357,7 @@ function renderProtoBreakdown(entries){
 
 function renderEntries(rawText){
     listEl.innerHTML = '';
-    const lines = rawText.split(/\r?\n/).map(l=>l.trim()).filter(l=>/^[a-z0-9]+:\/\//i.test(l));
+    const lines = rawText.split(/\r?\n/).map(l=>rewriteVlessConfig(l.trim())).filter(l=>/^[a-z0-9]+:\/\//i.test(l));
 
     if(lines.length === 0){
         listWrap.classList.add('hidden');
@@ -354,7 +425,7 @@ function renderEntries(rawText){
 }
 
 copyAllBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(window.__rawSub || '').then(() => toast('همه‌ی کانفیگ‌ها کپی شد'));
+    navigator.clipboard.writeText((window.__rawSub || '').split(/\r?\n/).map(rewriteVlessConfig).join('\n')).then(() => toast('همه‌ی کانفیگ‌ها کپی شد'));
 });
 
 // ---------- fetch ----------
